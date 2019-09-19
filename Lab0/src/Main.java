@@ -1,0 +1,1 @@
+public class Main {    public static void main(String[] args) {        TaylorEquation equation = new TaylorEquation();        equation.readData();        ApproximateCalculator taylorMethod = new ApproximateCalculator();        taylorMethod.calculate(equation);        equation.writeAndCompare();    }}
