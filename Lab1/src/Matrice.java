@@ -1,12 +1,14 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
+import java.util.Collections;
 
-public class Matrice {
+class Matrice {
     private int[][] matriceArray;
     private int m;
     private int n;
 
-    public void readData() {
+    void readData() {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter number of lines in your matrice: ");
         this.m = in.nextInt();
@@ -15,7 +17,7 @@ public class Matrice {
         this.matriceArray = new int[m][n];
     }
 
-    public void fillWithRandomNumbers() {
+    void fillWithRandomNumbers() {
         Random rnd = new Random();
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
@@ -24,7 +26,7 @@ public class Matrice {
         }
     }
 
-    public void print() {
+    void print() {
         System.out.print("Your matrice looks this way: ");
         for (int i = 0; i < m; i++) {
             System.out.println();
@@ -35,11 +37,8 @@ public class Matrice {
         System.out.println();
     }
 
-    public int getSize() {
-        return Math.min(this.m, this.n);
-    }
 
-    public int getDiagonalSum(int pos) {
+    private int getDiagonalSum(int pos) {
         int diagSum = 0;
         if (pos > 0) {
             for (int i = 0; i < Math.min(m, n) - pos; i++) {
@@ -52,5 +51,17 @@ public class Matrice {
             }
         }
         return diagSum;
+    }
+
+    ArrayList getAllDiagonalSums() {
+        ArrayList<Integer> diagonalSums = new ArrayList<Integer>();
+        int i;
+        for (i = 1 - Math.min(m, n); i < Math.min(m, n); i++) {
+            if (i == 0) {
+                i++;
+            }
+            diagonalSums.add(this.getDiagonalSum(i));
+        }
+        return diagonalSums;
     }
 }
