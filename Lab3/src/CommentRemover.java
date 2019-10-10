@@ -1,12 +1,13 @@
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CommentRemover {
     private String directory;
     private String fileName;
     private File file;
     private String fileStr;
-    private String[] cleanFile;
 
     public void setFileName(String name) {
         this.fileName = name;
@@ -29,15 +30,42 @@ public class CommentRemover {
         }
     }
 
+
     public void removeComments() {
-        cleanFile = fileStr.split("//.++|(?s)/\\*.*?\\*/");
+        int prevInd = 0;
+        StringBuilder clearBuilder = new StringBuilder();
+        StringBuilder dirtyBuilder = new StringBuilder(this.fileStr);
+        Matcher commentMatcher = Pattern.compile("('[^\\\\']*(\\\\.[^\\\\']*)*')" +
+                "|(\"[^\\\\\"]*(\\\\.[^\\\\\"]*)*\")" +
+                "|(/\\*[\\s\\S]*?\\*/)|(//.*?\\R)" +
+                "|(//.*?$)").matcher(dirtyBuilder.append("\n//"));
+
+        while (commentMatcher.find()) {
+            switch (dirtyBuilder.charAt(commentMatcher.start())) {
+                case '"':
+                case '\'':
+                    clearBuilder.append(dirtyBuilder.substring(prevInd, commentMatcher.end()));
+                    break;
+
+                case '/':
+                    clearBuilder.append(dirtyBuilder.substring(prevInd, commentMatcher.start()));
+                    if (dirtyBuilder.length() > commentMatcher.start() + 1 &&
+                            dirtyBuilder.charAt(commentMatcher.start() + 1) == '/') {
+                        clearBuilder.append("\n");
+                    }
+                    break;
+            }
+
+            prevInd = commentMatcher.end();
+        }
+
+        clearBuilder.trimToSize();
+        this.fileStr = clearBuilder.toString();
     }
 
     public void saveCleanFile() throws IOException {
         FileWriter fileWriter = new FileWriter(file, false);
-        for (String s : cleanFile) {
-            fileWriter.write(s);
-            fileWriter.flush();
-        }
+        fileWriter.write(this.fileStr);
+        fileWriter.flush();
     }
 }
