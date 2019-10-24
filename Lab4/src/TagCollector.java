@@ -1,5 +1,4 @@
-//  (?<=\<).+?(?=\>)
-
+import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
@@ -9,16 +8,21 @@ public class TagCollector {
 
     private Set<String> tagSet;
 
-    public void collectTags(FileManager fileManager){
-        String string = fileManager.getFileStr();
-        Pattern pattern = Pattern.compile("(\\[)(.*?)(\\])"); //регулярка которая ищет строку между скобками тэга
-        Matcher matcher = pattern.matcher(string);
-
-        tagSet = new TreeSet<>();
-
-        while(matcher.find())
-        {
-            tagSet.add(matcher.group(2));
+    public void collectTags(String input) {
+        tagSet = new TreeSet<>((String o1, String o2) -> o1.length() - o2.length());
+        Pattern pattern = Pattern.compile("<.*?>");
+        Matcher matcher = pattern.matcher(input);
+        while (matcher.find()) {
+            tagSet.add(matcher.group());
         }
+    }
+
+    public String getTagString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String buff : tagSet) {
+            stringBuilder.append(buff);
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
     }
 }

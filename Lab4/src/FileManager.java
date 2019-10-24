@@ -11,19 +11,9 @@ public class FileManager {
         in = new Scanner((System.in));
     }
 
-    private String getFileName() {
-        System.out.println("Enter name of your file: ");
-        return this.in.nextLine();
-    }
-
-    private String getFileDir() {
-        System.out.println("Enter directory of your file: ");
-        return this.in.nextLine();
-    }
-
-    public void readFile() throws IOException {
+    public void readFile(String fileName) throws IOException {
         try {
-            File buff = new File(this.getFileDir(), this.getFileName());
+            File buff = new File(fileName);
             FileInputStream fis = new FileInputStream(buff);
             byte[] data = new byte[(int) buff.length()];
             fis.read(data);
@@ -34,11 +24,11 @@ public class FileManager {
         }
     }
 
-    public String getFileStr(){
+    public String getFileStr() {
         return this.fileStr;
     }
 
-    public void saveCleanFile(String fileStr, String fileName) throws IOException {
+    public void saveFile(String fileStr, String fileName) throws IOException {
         FileWriter fileWriter = new FileWriter(fileName, false);
         fileWriter.write(fileStr);
         fileWriter.flush();
