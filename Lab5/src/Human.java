@@ -1,6 +1,4 @@
-import java.util.Comparator;
-
-public class Human {
+public class Human implements IType {
     private String id;
     private String email;
     private String birthDate;
@@ -10,8 +8,14 @@ public class Human {
     private String city;
     private String state;
 
-    Human(String str) {
-        String[] lines = str.split(";");
+
+    public String getState() {
+        return state;
+    }
+
+    @Override
+    public void arrangeString(String b) {
+        String[] lines = b.split(";");
         this.id = lines[0];
         this.email = lines[1];
         this.birthDate = lines[2];
@@ -22,10 +26,7 @@ public class Human {
         this.state = lines[7];
     }
 
-    public String getState() {
-        return state;
-    }
-
+    @Override
     public String toString() {
         return (id + " " + email + " " + birthDate + " " + firstName + " " + lastName + " " + gender + " " + city + " " + state);
     }

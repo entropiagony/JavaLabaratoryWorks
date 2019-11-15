@@ -1,22 +1,26 @@
 import java.util.List;
 
-public class Database {
-    private List<Human> data;
-    private IDatabaseLoader loader;
+public class Database<T extends IType> {
+    private List<T> data;
+    private IDatabaseLoader<T> loader;
+    private  ILogger logger;
 
-    Database(IDatabaseLoader _loader) {
-        this.loader = _loader;
+    Database(IDatabaseLoader loader) {
+        this.loader = loader;
+    }
+
+    Database(IDatabaseLoader loader, ILogger logger) {
+        this.loader = loader;
+        this.logger = logger;
     }
 
     public void load(String fileName) {
+        logger.log("Started loading data");
         data = loader.load(fileName);
+        logger.log("Finished loading data");
     }
 
-    public void test() {
-        System.out.println(data.toString());
-    }
-
-    public List<Human> getList() {
+    public List<T> getList() {
         return data;
     }
 
