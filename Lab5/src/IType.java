@@ -1,4 +1,5 @@
 public interface IType {
-    public void arrangeString(String b);
-    public String toString();
+    void initialize(String[] line);
+
+    String toString();
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public class Requests {
     private ILogger logger;
 
-    Requests(ILogger logger){
+    Requests(ILogger logger) {
         this.logger = logger;
     }
 

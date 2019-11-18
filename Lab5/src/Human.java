@@ -1,4 +1,6 @@
-public class Human implements IType {
+import org.json.JSONObject;
+
+public class Human implements IType, ICSVParsable, IJSONParsable {
     private String id;
     private String email;
     private String birthDate;
@@ -14,20 +16,39 @@ public class Human implements IType {
     }
 
     @Override
-    public void arrangeString(String b) {
-        String[] lines = b.split(";");
-        this.id = lines[0];
-        this.email = lines[1];
-        this.birthDate = lines[2];
-        this.firstName = lines[3];
-        this.lastName = lines[4];
-        this.gender = lines[5];
-        this.city = lines[6];
-        this.state = lines[7];
+    public void initialize(String[] map) {
+        this.id = map[0];
+        this.email = map[1];
+        this.birthDate = map[2];
+        this.firstName = map[3];
+        this.lastName = map[4];
+        this.gender = map[5];
+        this.city = map[6];
+        this.state = map[7];
     }
 
     @Override
     public String toString() {
         return (id + " " + email + " " + birthDate + " " + firstName + " " + lastName + " " + gender + " " + city + " " + state);
+    }
+
+    @Override
+    public String[] fromCSV(String line) {
+        return line.split(";");
+    }
+
+    @Override
+    public String[] fromJson(String line) {
+        JSONObject jsonObject = new JSONObject(line);
+        String[] arr = new String[8];
+        arr[0] = jsonObject.getString("guid");
+        arr[1] = jsonObject.getString("email");
+        arr[2] = jsonObject.getString("birthday");
+        arr[3] = jsonObject.getString("first");
+        arr[4] = jsonObject.getString("last");
+        arr[5] = jsonObject.getString("gender");
+        arr[6] = jsonObject.getString("city");
+        arr[7] = jsonObject.getString("state");
+        return arr;
     }
 }
