@@ -1,0 +1,24 @@
+18:36:39 Started loading data
+18:36:39 Started reading CSV file
+18:36:39 Finished reading CSV file
+18:36:39 Started parsing data
+18:36:39 Parsed 10000 lines
+18:36:39 Finished loading data
+18:36:39 Started loading data
+18:36:39 Started reading JSON file
+18:36:39 Finished reading JSON file
+18:36:39 Started parsing data
+18:36:39 Parsed 10000 lines
+18:36:39 Finished loading data
+18:36:39 Started saving database
+18:36:39 Finished saving database
+18:36:39 Started saving database
+18:36:39 Finished saving database
+18:36:39 Started getting unique states
+18:36:39 Finished getting unique states
+18:36:39 Started getting unique states
+18:36:39 Finished getting unique states
+18:36:39 Started getting list of users between 18 and 60 years old
+18:36:39 Finished getting list of users between 18 and 60 years old
+18:36:39 Started getting list of users between 18 and 60 years old
+18:36:39 Finished getting list of users between 18 and 60 years old

@@ -1,6 +1,6 @@
 import org.json.JSONObject;
 
-public class Human implements IType, ICSVParsable, IJSONParsable {
+public class Human implements IParsable, ICSVParsable, IJSONParsable {
     private String id;
     private String email;
     private String birthDate;
@@ -13,6 +13,10 @@ public class Human implements IType, ICSVParsable, IJSONParsable {
 
     public String getState() {
         return state;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
     }
 
     @Override

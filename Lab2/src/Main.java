@@ -1,12 +1,11 @@
-import java.io.IOException;
+import java.util.Collections;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        TextProcessor t = new TextProcessor();
-        UserInterface menu = new UserInterface();
-        menu.readText(t);
-        t.excludeSeparators();
-        t.sort();
-        menu.output(t);
+    public static void main(String [] args){
+        Matrice testMatrice = new Matrice();
+        testMatrice.readData();
+        testMatrice.fillWithRandomNumbers();
+        testMatrice.print();
+        System.out.println("Max sum of parallel to main diagonal diagonals: " + Collections.max(testMatrice.getAllDiagonalSums()));
     }
 }

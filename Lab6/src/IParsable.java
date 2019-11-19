@@ -1,4 +1,4 @@
-public interface IType {
+public interface IParsable {
     void initialize(String[] line);
 
     String toString();

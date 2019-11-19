@@ -1,6 +1,7 @@
+import java.util.Iterator;
 import java.util.List;
 
-public class Database<T extends IType> {
+public class Database<T>  {
     private List<T> data;
     private IDatabaseLoader<T> loader;
     private ILogger logger;
@@ -19,5 +20,4 @@ public class Database<T extends IType> {
     public List<T> getList() {
         return data;
     }
-
 }
